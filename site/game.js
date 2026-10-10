@@ -43,10 +43,6 @@
   if (state.fault === 'ground' || state.fault === 'clock' || state.challenge === 'ground' || state.challenge === 'clock') E.recover(state);
   state.observed = [];
   const imagePath = p => `assets/${(window.BEIDOU_ASSET_FILES || {})[p.file] || `${p.file}.svg`}`;
-  function notify(title, message, kind = '') {
-    $('message-title').textContent = title; $('message-text').textContent = message;
-    $('message-box').className = `message-box ${kind}`;
-  }
   function persist() { try { localStorage.setItem(storageKey, JSON.stringify({ version: 2, state })); } catch (_) {} }
   function tone(success = true) {
     if (!sound) return;
@@ -64,8 +60,6 @@
     const subtitle = document.createElement('span'); subtitle.className = 'part-subtitle'; subtitle.textContent = p.short;
     const check = document.createElement('span'); check.className = 'part-check'; check.textContent = '✓'; check.hidden = true;
     card.append(img, name, subtitle, check); tray.append(card);
-    const target = document.createElement('button'); target.type = 'button'; target.dataset.target = p.id; target.textContent = `安装到 ${p.name} 接口`;
-    $('install-targets').append(target);
   });
   function setView(id) {
     focus = ['all', 'space', 'ground', 'user'].includes(id) ? id : 'all';
@@ -76,8 +70,6 @@
     selected = p.id;
     $('detail-title').textContent = p.name; $('detail-text').textContent = p.description;
     if (width < 540) setView(p.group);
-    if (state.placed.includes(id)) notify(p.name, p.description);
-    else notify(`拿起了 ${p.name}`, `${p.description} 把它放到对应的轮廓接口。`);
     updateUI();
   }
   function updateUI() {
@@ -93,7 +85,6 @@
       card.querySelector('.part-check').hidden = !installed;
       card.setAttribute('aria-label', `${p.name}，${installed ? '已安装，点击了解作用' : '选择或拖动安装'}`);
     });
-    $('install-targets').querySelectorAll('[data-target]').forEach(b => b.disabled = state.placed.includes(b.dataset.target) || state.phase !== 'assembly');
     const active = state.phase !== 'assembly';
     $('start-button').disabled = !ready || state.placed.length !== 9 || state.phase === 'running';
     $('start-button').innerHTML = state.phase === 'complete' ? '<span aria-hidden="true">↻</span> 重播救援任务' : '<span aria-hidden="true">▶</span> 启动北斗导航';
@@ -112,13 +103,12 @@
     if (!result.ok) {
       const destination = E.PARTS.find(p => p.id === target);
       mapFeedback('error', '摆放出错，再试一次', result.message, source || destination || {x:600,y:375});
-      notify('接口还没对上，再试一次', result.message, 'error'); tone(false); return;
+      tone(false); return;
     }
     const p = E.PARTS.find(p => p.id === id);
     animations[id] = { x: source ? source.x : p.x, y: source ? source.y : p.y - 30, age: motionEnabled ? 0 : 1.2 };
     mapFeedback('success', p.name + ' · 安装正确', result.complete ? '九个组件已归位！点击地图下方的“启动北斗导航”。' : '组件已点亮。连接的组件就位后，信号会开始流动。', p);
     selected = null; hovered = null;
-    notify(result.complete ? '北斗系统，拼装完成！' : `${p.name} 已就位`, result.complete ? '九个组件各就其位。现在启动导航，看看卫星、地面站和终端怎样协作。' : p.description, 'success');
     tone(true); updateUI(); persist();
   }
   function scenePoint(event) {
@@ -166,8 +156,8 @@
         if (target) install(finished.id, target.id, point);
         else if (inside) {
           mapFeedback('error', '这里不是安装位置', '请把组件移到对应的轮廓上，或开启“显示安装提示”。', point);
-          notify('摆放出错，再试一次', '对准地图中的组件轮廓。也可以先点组件，再点安装位置。', 'error'); tone(false);
-        } else notify('组件已回到工作台', '把组件拖进地图，放到对应的轮廓上。');
+          tone(false);
+        }
       }
     }
     hovered = null;
@@ -214,7 +204,6 @@
     else if (target) showPart(target.id);
     else if (pending) { mapFeedback('error', '这里不是安装位置', '点击对应轮廓，或开启“显示安装提示”。', point); tone(false); }
   });
-  $('install-targets').addEventListener('click', e => { const b = e.target.closest('[data-target]'); if (b) install(selected, b.dataset.target); });
   document.querySelectorAll('[data-group]').forEach(b => b.addEventListener('click', () => {
     group = b.dataset.group; document.querySelectorAll('[data-group]').forEach(t => { t.classList.toggle('active', t === b); t.setAttribute('aria-pressed', String(t === b)); });
     if (width < 540 && group !== 'all') setView(group); updateUI();
@@ -223,11 +212,10 @@
   $('hint-button').addEventListener('click', () => { hints = !hints; $('hint-button').setAttribute('aria-pressed', String(hints)); $('hint-button').textContent = hints ? '隐藏安装提示' : '显示安装提示'; });
   $('start-button').addEventListener('click', () => {
     if (!E.start(state)) return; orbitTime = 0; faultAge = 0;
-    notify('导航上线，救援出发', '卫星播发导航信号，地面段持续监控维护，终端接收多颗卫星信号并计算位置。蓝色箭头指向终端；金色箭头表示监控和信息更新。');
     updateUI(); persist(); tone(true);
   });
   $('pause-button').addEventListener('click', () => {
-    if (state.fault) { E.recover(state); faultAge = 0; notify('系统已恢复', '可靠导航需要系统协作，也需要掌握关键技术和持续维护能力。自主可控与开放合作、兼容其他导航系统可以同时实现。', 'success'); }
+    if (state.fault) { E.recover(state); faultAge = 0; }
     else state.paused = !state.paused;
     updateUI(); persist();
   });
@@ -235,12 +223,12 @@
     clearFeedback();
     state = E.INITIAL(); selected = null; hovered = null; animations = {}; orbitTime = 0; faultAge = 0;
     $('detail-title').textContent = '每个组件，都有自己的职责'; $('detail-text').textContent = '太空提供导航信号，地面负责监控维护，终端接收信号并计算位置。';
-    notify('新的拼装任务已准备好', '从组件库拿起第一个组件，寻找它在系统中的位置。'); updateUI(); persist();
+    updateUI(); persist();
   }
   $('reset-button').addEventListener('click', reset);
   $('sound-button').addEventListener('click', () => { sound = !sound; $('sound-button').textContent = sound ? '音效开' : '音效关'; $('sound-button').setAttribute('aria-pressed', String(sound)); $('sound-button').setAttribute('aria-label', sound ? '关闭音效' : '开启音效'); if (sound) tone(); });
   $('fullscreen-button').addEventListener('click', async () => {
-    try { if (document.fullscreenElement || document.webkitFullscreenElement) await (document.exitFullscreen || document.webkitExitFullscreen).call(document); else await (document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen).call(document.documentElement); } catch (_) { notify('当前环境暂不支持全屏', '仍可直接体验拼装和运行演示。'); }
+    try { if (document.fullscreenElement || document.webkitFullscreenElement) await (document.exitFullscreen || document.webkitExitFullscreen).call(document); else await (document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen).call(document.documentElement); } catch (_) { $('fullscreen-button').textContent = '请使用浏览器全屏'; }
   });
   document.addEventListener('fullscreenchange', () => $('fullscreen-button').textContent = document.fullscreenElement ? '退出全屏' : '全屏');
   let fallbackDialog = null, dialogReturnFocus = null;
@@ -268,7 +256,7 @@
   });
   $('help-button').addEventListener('click', () => openDialog('help-dialog'));
   $('help-done').addEventListener('click', () => closeDialog($('help-dialog')));
-  $('sources-button').addEventListener('click', () => openDialog('sources-dialog'));
+  $('sources-button').addEventListener('click', () => { closeDialog($('help-dialog')); openDialog('sources-dialog'); });
 
   function resize() {
     const rect = canvas.getBoundingClientRect(), ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -292,8 +280,7 @@
       } catch (_) { /* Keep the static Earth when pixel readback is unavailable. */ }
       silhouettes = S.masks(assets, (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; });
       ready = true; $('scene-loading').hidden = true; updateUI();
-      if (state.placed.length) notify('上次的装配进度已恢复', state.phase === 'assembly' ? '可以继续安装剩余组件，也可以重新开始。' : '运行已暂停。点击“继续演示”恢复导航。');
-    } catch (error) { $('scene-loading').textContent = '组件加载失败，请确认 assets 文件夹和网页放在一起。'; notify('素材尚未加载完整', error.message, 'error'); }
+    } catch (error) { $('scene-loading').textContent = '组件加载失败，请确认 assets 文件夹和网页放在一起。'; }
   }
   function frame(timestamp) {
     const dt = lastFrame ? Math.min((timestamp - lastFrame) / 1000, .1) : 0; lastFrame = timestamp;
@@ -308,7 +295,7 @@
       Object.keys(animations).forEach(id => { animations[id].age += dt; if (animations[id].age > 1.3) delete animations[id]; });
       S.draw(context, { width, height, state, assets, earth, silhouettes, time: orbitTime, effectTime: visualTime, feedback: feedback, selected, hovered, hints, animations, focus, clockError:state.clockNs, faultAge });
       if (lastPhase !== state.phase) {
-        if (state.phase === 'complete') { notify('救援船已抵达，任务完成', '三个组成部分协作，才能提供可靠的导航服务。', 'success'); tone(); persist(); }
+        if (state.phase === 'complete') { tone(); persist(); }
         updateUI(); lastPhase = state.phase;
       }
       if (timestamp - lastPersist > 4000 && state.phase === 'running') { persist(); lastPersist = timestamp; }
