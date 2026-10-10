@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" role="img"><title>terminal-car</title><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3ac"/><stop offset=".24" stop-color="#e9c66a"/><stop offset=".57" stop-color="#977037"/><stop offset=".8" stop-color="#e1b44e"/><stop offset="1" stop-color="#6e5025"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".48" stop-color="#a8b9c7"/><stop offset="1" stop-color="#455e75"/></linearGradient>
+<linearGradient id="white" x2=".5" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#849daf"/></linearGradient>
+<linearGradient id="solar" x2=".8" y2="1"><stop stop-color="#326ba4"/><stop offset=".5" stop-color="#163b73"/><stop offset="1" stop-color="#0b244b"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="1"><stop stop-color="#59c8e3"/><stop offset=".5" stop-color="#183b65"/><stop offset="1" stop-color="#0b1c35"/></linearGradient>
+<pattern id="cells" width="13" height="17" patternUnits="userSpaceOnUse"><rect width="13" height="17" fill="url(#solar)"/><path d="M0 0H13V17H0Z" stroke="#88b7d0" stroke-opacity=".55" stroke-width=".65"/><path d="M2 2H11M2 15H11" stroke="#b5dcee" stroke-opacity=".2" stroke-width=".6"/></pattern>
+<filter id="shadow" x="-40%" y="-40%" width="180%" height="200%"><feDropShadow dx="1" dy="5" stdDeviation="3" flood-color="#020913" flood-opacity=".45"/></filter>
+</defs><g filter="url(#shadow)">
+<ellipse cx="145" cy="177" rx="109" ry="23" fill="#041326" opacity=".35"/>
+<path d="M40 123L68 99L129 110L183 100L243 129V163L181 191L47 153Z" fill="#d7e7ee"/>
+<path d="M68 99L106 61L172 82L203 118L129 144Z" fill="url(#white)"/>
+<path d="M76 101L107 71L164 90L179 116L128 135Z" fill="url(#glass)" stroke="#a4c5d7" stroke-width="2"/>
+<path d="M119 77L129 135" stroke="#dce9ef" stroke-width="4"/>
+<path d="M47 121L129 146L203 118L242 130L179 160L94 139Z" fill="#eef5f8"/>
+<path d="M179 160L242 130V163L181 191Z" fill="#839eb3"/>
+<path d="M50 138L94 151" stroke="#eea868" stroke-width="5"/>
+<path d="M191 167L234 146" stroke="#1f3d57" stroke-width="7"/>
+<path d="M189 157L205 150M221 142L236 135" stroke="#c7f4fd" stroke-width="5"/>
+<g fill="#152c42" stroke="#8ba2b3" stroke-width="3"><ellipse cx="85" cy="160" rx="17" ry="23" transform="rotate(-18 85 160)"/><ellipse cx="205" cy="177" rx="16" ry="20" transform="rotate(14 205 177)"/></g>
+<g fill="url(#metal)"><ellipse cx="85" cy="160" rx="8" ry="12"/><ellipse cx="205" cy="177" rx="7" ry="11"/></g>
+<path d="M145 87V67" stroke="#6989a4" stroke-width="2"/><circle cx="145" cy="64" r="3" fill="#77e0ed"/>
+</g></svg>

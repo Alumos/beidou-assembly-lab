@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f8fb">
+  <link rel="icon" href="assets/satellite-geo.svg" type="image/svg+xml">
+  <title>任务一：北斗拼装台</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="engine.js"></script>
+  <script defer src="scene.js"></script>
+  <script defer src="assets/asset-map.js"></script>
+  <script defer src="game.js"></script>
+</head>
+<body>
+<main class="game-shell">
+  <header class="masthead">
+    <a class="brand" href="#" aria-label="任务一：北斗拼装台首页"><span class="brand-star" aria-hidden="true">✦</span><span>任务一：北斗拼装台<small>拖动组件，点亮你的北斗</small></span></a>
+    <div class="assembly-progress"><div><strong id="installed-count">0</strong><span> / 9 组件已归位</span></div><div class="progress-track" role="progressbar" aria-label="拼装进度" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><span id="progress-fill"></span></div></div>
+    <div class="header-actions"><button id="motion-button" class="icon-button" aria-pressed="true">动画开</button><button id="sound-button" class="icon-button" aria-pressed="true" aria-label="关闭音效">音效开</button><button id="fullscreen-button" class="icon-button">全屏</button><button id="help-button" class="icon-button">任务指南</button></div>
+  </header>
+  <section class="play-layout">
+    <div class="world-column">
+      <div class="world-frame" id="world-frame">
+        <div class="world-topline"><span><i id="state-dot"></i><span id="state-label">等待装配</span></span><span class="simulation-label">教学示意</span>        <div class="world-view" aria-label="场景视角"><button class="active" data-view="all" aria-pressed="true">全景</button><button data-view="space" aria-pressed="false">太空</button><button data-view="ground" aria-pressed="false">地面</button><button data-view="user" aria-pressed="false">应用</button></div></div>
+        <canvas id="world" width="1200" height="750" aria-label="北斗拼装场景：太空中的卫星，地面站，以及车船与手机用户终端。可以拖动组件或使用下方键盘安装按钮。"></canvas>
+        <div class="scene-feedback" id="scene-feedback" role="status" aria-live="polite" hidden><span id="feedback-icon" aria-hidden="true"></span><div><strong id="feedback-title"></strong><p id="feedback-text"></p></div></div>
+        <div class="scene-loading" id="scene-loading">正在准备组件…</div>
+        <div class="map-bottom">      <div class="scene-controls"><button id="start-button" class="primary-button" disabled><span aria-hidden="true">▶</span> 启动北斗导航</button><button id="pause-button" class="secondary-button" disabled>暂停演示</button><button id="hint-button" class="secondary-button" aria-pressed="false">显示安装提示</button><button id="reset-button" class="quiet-button">重新拼装</button></div>
+        <div class="world-hint" id="world-hint"><span class="hint-dot"></span>拖动组件到对应轮廓；也可以先点组件，再点位置。</div></div>
+
+      </div>
+
+      <div class="message-box" id="message-box" role="status" aria-live="polite"><span class="message-icon" aria-hidden="true">✦</span><div><strong id="message-title">你的任务，从第一个组件开始</strong><p id="message-text">点击或拖动一个组件。观察形状，判断它的作用，找到它在系统中的位置。</p></div></div>
+      <details class="keyboard-controls"><summary>键盘安装 / 点选安装位置</summary><div id="install-targets"></div></details>
+    </div>
+    <aside class="parts-panel"><div class="parts-heading"><div><h2 id="tray-title">组件库</h2><p class="tray-instruction">拖入地图 · 找到对应位置</p></div><span id="tray-count">9 件</span></div><div class="parts-tabs" role="group" aria-label="筛选组件"><button class="active" data-group="all" aria-pressed="true">全部</button><button data-group="space" aria-pressed="false">空间</button><button data-group="ground" aria-pressed="false">地面</button><button data-group="user" aria-pressed="false">用户</button></div><div class="parts-grid" id="parts-grid"></div><div class="part-detail" id="part-detail"><span class="detail-kicker">装配提示</span><h3 id="detail-title">每个组件，都有自己的职责</h3><p id="detail-text">太空提供导航信号，地面负责监控维护，终端接收信号并计算位置。</p></div></aside>
+  </section>
+  <footer class="footer"><span>从认识组成，到理解协作，再到掌握关键技术。</span><button id="sources-button">教学与素材来源</button></footer>
+  <div class="filing-footer"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2021038338号-1</a></div>
+</main>
+<div class="drag-sprite" id="drag-sprite" hidden><img alt="正在安装的组件"><span></span></div>
+<dialog id="help-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭指南">×</button></form><p class="eyebrow">任务指南</p><h2>亲手，装好一个北斗系统</h2><ol class="guide-list"><li><b>拿起组件</b><span>拖动组件到场景中的轮廓。手机和平板可以直接拖动，也可以先点组件，再点安装位置。</span></li><li><b>让系统运行</b><span>完成 9 件组件后，启动导航，观察轨道、地面维护链路和卫星向终端播发的信号。</span></li></ol><p class="guide-note">三个卫星图形代表三类轨道，三类地面站与三个终端代表功能类型；数量、比例、轨道速度和故障效果均为教学示意。</p><button class="primary-button" id="help-done">开始拼装</button></dialog>
+<dialog id="sources-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭来源">×</button></form><p class="eyebrow">教学与素材来源</p><h2>科学依据与模拟边界</h2><ul class="source-list"><li>《系统自主可控的重要意义》PDF 第 1–3 页，教材第 63–65 页：北斗的意义、原子钟及系统组成。</li><li><a href="http://www.beidou.gov.cn/xt/xtjs/" target="_blank" rel="noopener">北斗官网 · 系统介绍</a>：空间段、地面段、用户段，以及自主、开放、兼容、渐进的建设原则。</li><li>组件为手工绘制的 SVG 教学插画，外形不代表特定型号。地球纹理来自 <a href="https://github.com/mrdoob/three.js/tree/dev/examples/textures/planets" target="_blank" rel="noopener">three.js 示例资源</a>，使用范围以原素材授权为准。</li><li>运行展示压缩了时间与空间尺度。真实 GEO 卫星相对地面保持静止。此处地球纹理转动与轨道运动分别作教学示意，不用于判断真实相对位置；三维轨道、服务覆盖及系统冗余未在此完整建模。</li><li>自主可控意味着掌握关键技术与运行维护能力，同时可以开放合作，并与其他导航系统兼容。</li></ul></dialog>
+</body>
+</html>

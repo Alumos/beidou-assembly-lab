@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" role="img"><title>terminal-phone</title><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3ac"/><stop offset=".24" stop-color="#e9c66a"/><stop offset=".57" stop-color="#977037"/><stop offset=".8" stop-color="#e1b44e"/><stop offset="1" stop-color="#6e5025"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".48" stop-color="#a8b9c7"/><stop offset="1" stop-color="#455e75"/></linearGradient>
+<linearGradient id="white" x2=".5" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#849daf"/></linearGradient>
+<linearGradient id="solar" x2=".8" y2="1"><stop stop-color="#326ba4"/><stop offset=".5" stop-color="#163b73"/><stop offset="1" stop-color="#0b244b"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="1"><stop stop-color="#59c8e3"/><stop offset=".5" stop-color="#183b65"/><stop offset="1" stop-color="#0b1c35"/></linearGradient>
+<pattern id="cells" width="13" height="17" patternUnits="userSpaceOnUse"><rect width="13" height="17" fill="url(#solar)"/><path d="M0 0H13V17H0Z" stroke="#88b7d0" stroke-opacity=".55" stroke-width=".65"/><path d="M2 2H11M2 15H11" stroke="#b5dcee" stroke-opacity=".2" stroke-width=".6"/></pattern>
+<filter id="shadow" x="-40%" y="-40%" width="180%" height="200%"><feDropShadow dx="1" dy="5" stdDeviation="3" flood-color="#020913" flood-opacity=".45"/></filter>
+</defs><g filter="url(#shadow)" transform="rotate(15 142 110)">
+<path d="M95 33L174 23L188 181L107 195Z" fill="#3d526a" stroke="#a5b7c4" stroke-width="3"/>
+<path d="M101 40L169 32L181 173L112 186Z" fill="url(#glass)"/>
+<path d="M122 37L148 34" stroke="#172c41" stroke-width="4" stroke-linecap="round"/>
+<path d="M111 73L178 111M106 109L172 156M114 148L166 64M132 178L151 47" stroke="#6293aa" stroke-opacity=".6" stroke-width="3"/>
+<path d="M119 159L128 125L149 111L163 80" fill="none" stroke="#6ce5f5" stroke-width="4"/>
+<circle cx="149" cy="111" r="13" fill="#68dfec" opacity=".15"/><circle cx="149" cy="111" r="5" fill="#adf7ff"/>
+<path d="M165 76L163 80L170 82" fill="none" stroke="#bcf6fa" stroke-width="3"/>
+<path d="M130 177L157 173" stroke="#bacfd9" stroke-width="2" stroke-linecap="round"/>
+</g></svg>

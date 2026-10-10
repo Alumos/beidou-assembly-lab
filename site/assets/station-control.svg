@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" role="img"><title>station-control</title><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3ac"/><stop offset=".24" stop-color="#e9c66a"/><stop offset=".57" stop-color="#977037"/><stop offset=".8" stop-color="#e1b44e"/><stop offset="1" stop-color="#6e5025"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".48" stop-color="#a8b9c7"/><stop offset="1" stop-color="#455e75"/></linearGradient>
+<linearGradient id="white" x2=".5" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#849daf"/></linearGradient>
+<linearGradient id="solar" x2=".8" y2="1"><stop stop-color="#326ba4"/><stop offset=".5" stop-color="#163b73"/><stop offset="1" stop-color="#0b244b"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="1"><stop stop-color="#59c8e3"/><stop offset=".5" stop-color="#183b65"/><stop offset="1" stop-color="#0b1c35"/></linearGradient>
+<pattern id="cells" width="13" height="17" patternUnits="userSpaceOnUse"><rect width="13" height="17" fill="url(#solar)"/><path d="M0 0H13V17H0Z" stroke="#88b7d0" stroke-opacity=".55" stroke-width=".65"/><path d="M2 2H11M2 15H11" stroke="#b5dcee" stroke-opacity=".2" stroke-width=".6"/></pattern>
+<filter id="shadow" x="-40%" y="-40%" width="180%" height="200%"><feDropShadow dx="1" dy="5" stdDeviation="3" flood-color="#020913" flood-opacity=".45"/></filter>
+</defs><g filter="url(#shadow)">
+<path d="M28 171L146 210L255 157L132 119Z" fill="#304b66"/>
+<path d="M66 111L141 136V188L66 163Z" fill="#68829b"/>
+<path d="M141 136L211 107V159L141 188Z" fill="#324e6a"/>
+<path d="M66 111L136 82L211 107L141 136Z" fill="url(#white)"/>
+<path d="M92 74L136 88V139L92 124Z" fill="#b7cbd7"/>
+<path d="M136 88L176 70V122L136 139Z" fill="#66849c"/>
+<path d="M92 74L131 56L176 70L136 88Z" fill="#dce8ed"/>
+<g stroke="#243a55" stroke-width="6"><path d="M78 126L130 143M78 143L130 161M151 145L198 125M151 163L198 143M101 90L127 99M145 96L165 88M101 108L127 117"/></g>
+<g stroke="#71d9ed" stroke-opacity=".8" stroke-width="2"><path d="M78 126L130 143M151 145L198 125M151 163L179 151M101 90L116 95"/></g>
+<path d="M224 128V58M224 65L211 75M224 65L237 75" stroke="#adc8d9" stroke-width="3"/>
+<circle cx="224" cy="53" r="5" fill="#ecbd65"/>
+<path d="M49 157V119M49 119L33 116L36 106L66 117Z" fill="#becdd8" stroke="#758fa5"/>
+<path d="M132 192V164L143 168V189" fill="#1c344c"/>
+</g></svg>

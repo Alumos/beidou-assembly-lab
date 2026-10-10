@@ -1,0 +1,8 @@
+.git
+.github
+artifacts
+node_modules
+scripts
+README.md
+.DS_Store
+*.log

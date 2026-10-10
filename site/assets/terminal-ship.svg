@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" role="img"><title>terminal-ship</title><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3ac"/><stop offset=".24" stop-color="#e9c66a"/><stop offset=".57" stop-color="#977037"/><stop offset=".8" stop-color="#e1b44e"/><stop offset="1" stop-color="#6e5025"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".48" stop-color="#a8b9c7"/><stop offset="1" stop-color="#455e75"/></linearGradient>
+<linearGradient id="white" x2=".5" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#849daf"/></linearGradient>
+<linearGradient id="solar" x2=".8" y2="1"><stop stop-color="#326ba4"/><stop offset=".5" stop-color="#163b73"/><stop offset="1" stop-color="#0b244b"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="1"><stop stop-color="#59c8e3"/><stop offset=".5" stop-color="#183b65"/><stop offset="1" stop-color="#0b1c35"/></linearGradient>
+<pattern id="cells" width="13" height="17" patternUnits="userSpaceOnUse"><rect width="13" height="17" fill="url(#solar)"/><path d="M0 0H13V17H0Z" stroke="#88b7d0" stroke-opacity=".55" stroke-width=".65"/><path d="M2 2H11M2 15H11" stroke="#b5dcee" stroke-opacity=".2" stroke-width=".6"/></pattern>
+<filter id="shadow" x="-40%" y="-40%" width="180%" height="200%"><feDropShadow dx="1" dy="5" stdDeviation="3" flood-color="#020913" flood-opacity=".45"/></filter>
+</defs><g filter="url(#shadow)">
+<ellipse cx="141" cy="180" rx="114" ry="15" fill="#79d9e5" opacity=".2"/>
+<path d="M24 132L167 174L254 125L240 156L164 196L57 163Z" fill="#cddae4"/>
+<path d="M24 132L167 174L254 125L167 141L81 116Z" fill="#f0f5f8"/>
+<path d="M57 163L164 196L240 156L230 169L164 205L66 176Z" fill="#334c6a"/>
+<path d="M94 99L159 120V165L94 146Z" fill="#d6e4ed"/>
+<path d="M159 120L196 101V144L159 165Z" fill="#839cb2"/>
+<path d="M94 99L130 81L196 101L159 120Z" fill="#f2f7fa"/>
+<path d="M111 88L152 101V120L111 107Z" fill="#dce8ef"/>
+<path d="M152 101L174 90V109L152 120Z" fill="#718ca5"/>
+<path d="M111 88L132 77L174 90L152 101Z" fill="#fafcfe"/>
+<path d="M109 119L148 132M169 124L184 115" stroke="#25435f" stroke-width="9"/>
+<path d="M109 119L132 127M169 124L177 119" stroke="#68c5df" stroke-width="3"/>
+<path d="M137 81V42M137 51L115 58M137 51L160 57" stroke="#dae8f1" stroke-width="3"/>
+<circle cx="137" cy="39" r="5" fill="#77e0ed"/>
+<ellipse cx="178" cy="95" rx="12" ry="5" fill="#f4f9fc"/>
+<path d="M35 123L61 155M225 129L245 124" stroke="#d58836" stroke-width="4"/>
+</g></svg>

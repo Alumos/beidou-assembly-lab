@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" role="img"><title>station-inject</title><defs>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3ac"/><stop offset=".24" stop-color="#e9c66a"/><stop offset=".57" stop-color="#977037"/><stop offset=".8" stop-color="#e1b44e"/><stop offset="1" stop-color="#6e5025"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f6f8"/><stop offset=".48" stop-color="#a8b9c7"/><stop offset="1" stop-color="#455e75"/></linearGradient>
+<linearGradient id="white" x2=".5" y2="1"><stop stop-color="#f7fafc"/><stop offset="1" stop-color="#849daf"/></linearGradient>
+<linearGradient id="solar" x2=".8" y2="1"><stop stop-color="#326ba4"/><stop offset=".5" stop-color="#163b73"/><stop offset="1" stop-color="#0b244b"/></linearGradient>
+<linearGradient id="glass" x2="1" y2="1"><stop stop-color="#59c8e3"/><stop offset=".5" stop-color="#183b65"/><stop offset="1" stop-color="#0b1c35"/></linearGradient>
+<pattern id="cells" width="13" height="17" patternUnits="userSpaceOnUse"><rect width="13" height="17" fill="url(#solar)"/><path d="M0 0H13V17H0Z" stroke="#88b7d0" stroke-opacity=".55" stroke-width=".65"/><path d="M2 2H11M2 15H11" stroke="#b5dcee" stroke-opacity=".2" stroke-width=".6"/></pattern>
+<filter id="shadow" x="-40%" y="-40%" width="180%" height="200%"><feDropShadow dx="1" dy="5" stdDeviation="3" flood-color="#020913" flood-opacity=".45"/></filter>
+</defs><g filter="url(#shadow)">
+<ellipse cx="139" cy="189" rx="103" ry="22" fill="#314b64"/>
+<path d="M100 161L137 176L183 158V182L137 200L100 185Z" fill="#7891a6"/>
+<path d="M112 163L137 100L161 166" fill="none" stroke="#b9cbd7" stroke-width="10"/>
+<path d="M139 110L165 130" stroke="#6b8397" stroke-width="10"/>
+<g transform="rotate(-32 150 92)">
+<path d="M79 83Q147 182 221 84Z" fill="url(#white)" stroke="#a7becf" stroke-width="2"/>
+<ellipse cx="150" cy="83" rx="71" ry="27" fill="#dde8ef" stroke="#f9fcfe" stroke-width="3"/>
+<ellipse cx="150" cy="83" rx="59" ry="19" fill="#a8bccc"/>
+<path d="M89 83L150 38L209 83M150 84V38" fill="none" stroke="#738c9f" stroke-width="2"/>
+<rect x="143" y="30" width="14" height="17" rx="3" fill="url(#metal)"/>
+<path d="M96 97Q147 130 204 95M109 108Q149 132 190 108" fill="none" stroke="#7a93a8" stroke-opacity=".6"/>
+</g>
+<path d="M215 170V105M208 116H222M201 131H229M210 170L215 135L220 170" stroke="#8ca5b8" stroke-width="3"/><circle cx="215" cy="101" r="4" fill="#77d6ec"/>
+</g></svg>

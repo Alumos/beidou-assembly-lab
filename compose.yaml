@@ -1,0 +1,15 @@
+services:
+  beidou:
+    image: ghcr.io/alumos/beidou-assembly-lab:latest
+    platform: linux/amd64
+    pull_policy: always
+    ports:
+      - "18082:80"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
