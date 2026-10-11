@@ -42,8 +42,10 @@ async function verifyFlow(browser, legacy) {
   await page.goto(baseURL); await ready(page);
   assert.equal(await page.locator('#world-frame #reset-button').count(),1);
   assert.equal(await page.locator('#world-frame #start-button').count(),1);
+  assert.deepEqual(await page.locator('.world-view button').allTextContents(),['空间','地面','用户']);
+  assert.equal(await page.locator('.message-box, .keyboard-controls, .footer').count(),0);
   const firstCanvas = await page.locator('#world').boundingBox();
-  assert(firstCanvas.y < 150 && firstCanvas.height > 500, 'Map should fill the desktop workspace');
+  assert(firstCanvas.y < 150 && firstCanvas.height > 430, 'Map should fill the desktop workspace');
   const phone = await page.locator('[data-part="phone"]').boundingBox();
   assert(phone.y + phone.height <= 768, 'All nine cards should fit on a classroom screen');
   // Earth turns before assembly, even without any installed component or moving link.

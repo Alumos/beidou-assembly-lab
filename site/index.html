@@ -22,7 +22,7 @@
   <section class="play-layout">
     <div class="world-column">
       <div class="world-frame" id="world-frame">
-        <div class="world-topline"><span><i id="state-dot"></i><span id="state-label">等待装配</span></span><span class="simulation-label">教学示意</span>        <div class="world-view" aria-label="场景视角"><button class="active" data-view="all" aria-pressed="true">全景</button><button data-view="space" aria-pressed="false">太空</button><button data-view="ground" aria-pressed="false">地面</button><button data-view="user" aria-pressed="false">应用</button></div></div>
+        <div class="world-topline"><span><i id="state-dot"></i><span id="state-label">等待装配</span></span><span class="simulation-label">教学示意</span>        <div class="world-view" aria-label="场景分段视角"><button data-view="space" aria-pressed="false">空间</button><button data-view="ground" aria-pressed="false">地面</button><button data-view="user" aria-pressed="false">用户</button></div></div>
         <canvas id="world" width="1200" height="750" aria-label="北斗拼装场景：太空中的卫星，地面站，以及车船与手机用户终端。可以拖动组件，或先点选组件再点击对应轮廓。"></canvas>
         <div class="scene-feedback" id="scene-feedback" role="status" aria-live="polite" hidden><span id="feedback-icon" aria-hidden="true"></span><div><strong id="feedback-title"></strong><p id="feedback-text"></p></div></div>
         <div class="scene-loading" id="scene-loading">正在准备组件…</div>

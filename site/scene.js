@@ -51,6 +51,13 @@
     size = Math.max(size, 14 / textScale);
     c.fillStyle = color; c.font = `${weight} ${size}px ${FONT}`; c.textAlign = align; c.textBaseline = 'middle'; c.fillText(value, x, y);
   }
+  function textRuns(c, runs, x, y, size = 15) {
+    size = Math.max(size, 14 / textScale); c.textAlign = 'left'; c.textBaseline = 'middle';
+    runs.forEach(run => {
+      c.fillStyle = run.color; c.font = `${run.weight || 700} ${size}px ${FONT}`;
+      c.fillText(run.value, x, y); x += c.measureText(run.value).width;
+    });
+  }
   function line(c, x1, y1, x2, y2, color, width = 1) { c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
   function path(c, pts, fill, stroke) {
     c.beginPath(); pts.forEach((p, i) => i ? c.lineTo(...p) : c.moveTo(...p)); c.closePath();
@@ -181,14 +188,18 @@
     E.ORBITS.forEach(o => orbitalPath(ctx, o, true, running));
     terrain(ctx, time);
     // Contextual labels are part of the scene, not substitutes for the objects.
-    const labelSize = Math.max(21, 16 / view.scale);
-    if (focus === 'all' || focus === 'space') { text(ctx, '空间段', 542, 73, labelSize, '#2c7687', 'left', 500); if (!narrow) text(ctx, '三类轨道，协同提供导航信号', 542, 101, 16, '#4b799b'); }
-    if (focus === 'all' || focus === 'ground') { text(ctx, '地面段', 64, 467, labelSize, '#3a6278', 'left', 500); if (!narrow) text(ctx, '监控 · 管理 · 信息更新', 64, 493, 16, '#4b7d9b'); }
-    if (focus === 'all' || focus === 'user') { text(ctx, '用户段', 903, 731, labelSize, '#2c7687', 'left', 500); }
+    const labelSize = Math.max(28, 20 / view.scale);
+    if (focus === 'all' || focus === 'space') { text(ctx, '空间段', 542, 73, labelSize, '#075985', 'left', 800); if (!narrow) text(ctx, '三类轨道，协同提供导航信号', 542, 101, 18, '#0c4a6e', 'left', 700); }
+    if (focus === 'all' || focus === 'ground') { text(ctx, '地面段', 64, 467, labelSize, '#166534', 'left', 800); if (!narrow) text(ctx, '监控 · 管理 · 信息更新', 64, 493, 18, '#14532d', 'left', 700); }
+    if (focus === 'all' || focus === 'user') { text(ctx, '用户段', 903, 731, labelSize, '#9a3412', 'left', 800); }
     if (!narrow && focus === 'all') {
-      text(ctx, running ? '海上救援进行中' : '一起，点亮北斗', 52, 118, 30, '#245373', 'left', 600);
-      text(ctx, running ? '观察信号怎样抵达用户终端' : '拖动组件，找到对应轮廓', 52, 155, 19, '#55768b');
-      text(ctx, '① 空间段  ② 地面段  ③ 用户段', 52, 193, 17, '#55768b');
+      text(ctx, running ? '海上救援进行中' : '一起，点亮北斗', 52, 118, 36, '#1e4d6b', 'left', 800);
+      text(ctx, running ? '观察信号怎样抵达用户终端' : '拖动组件，找到对应轮廓', 52, 157, 23, '#3f6780', 'left', 700);
+      textRuns(ctx, [
+        { value: '① 空间段', color: '#075985' },
+        { value: '   ② 地面段', color: '#166534' },
+        { value: '   ③ 用户段', color: '#9a3412' }
+      ], 52, 198, 21);
     }
     const positions = {};
     E.PARTS.forEach(p => { positions[p.id] = E.position(p, time, running, state.missionTime); });
@@ -222,8 +233,9 @@
       ctx.save(); ctx.strokeStyle = wrongHover ? '#c65338' : highlight ? '#19879a' : 'rgba(75,121,155,0.604)'; ctx.lineWidth = highlight ? 1.6 : 1; ctx.setLineDash([4, 6]);
       ctx.beginPath(); ctx.ellipse(p.x, p.y + p.h * .31, p.w * .38, p.h * .17, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
       if (!narrow || focus !== 'all') {
-        const size = Math.max(17, 13 / view.scale);
-        text(ctx, hints || highlight ? p.name : p.group === 'space' ? `${p.id.toUpperCase()} 接口` : '待安装', p.x, p.y + p.h * .52, size, highlight ? '#19889a' : '#4b779b', 'center');
+        const size = Math.max(21, 16 / view.scale);
+        const groupColor = p.group === 'space' ? '#075985' : p.group === 'ground' ? '#166534' : '#9a3412';
+        text(ctx, hints || highlight ? p.name : p.group === 'space' ? `${p.id.toUpperCase()} 接口` : '待安装', p.x, p.y + p.h * .52, size, highlight ? '#19889a' : groupColor, 'center', 700);
       }
     });
     E.PARTS.filter(p => state.placed.includes(p.id)).sort((a, b) => positions[a.id].y - positions[b.id].y).forEach(p => {
@@ -247,8 +259,9 @@
       if (running && p.group === 'user') {
         ctx.save(); ctx.strokeStyle = state.fault ? 'rgba(144,84,35,0.467)' : 'rgba(33,130,145,0.467)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(pos.x, pos.y + p.h * .34, p.w * .35, p.h * .13, 0, 0, 2 * Math.PI); ctx.stroke(); ctx.restore();
       }
-      if ((!narrow || focus !== 'all') && p.group !== 'space') text(ctx, p.name, pos.x, pos.y + p.h * .49, Math.max(17, 13 / view.scale), '#3a5d78', 'center');
-      if ((!narrow || focus !== 'all') && p.group === 'space') text(ctx, p.id.toUpperCase(), pos.x, pos.y + p.h * .43, Math.max(17, 13 / view.scale), '#87672b', 'center');
+      const groupColor = p.group === 'space' ? '#075985' : p.group === 'ground' ? '#166534' : '#9a3412';
+      if ((!narrow || focus !== 'all') && p.group !== 'space') text(ctx, p.name, pos.x, pos.y + p.h * .49, Math.max(21, 16 / view.scale), groupColor, 'center', 700);
+      if ((!narrow || focus !== 'all') && p.group === 'space') text(ctx, p.id.toUpperCase(), pos.x, pos.y + p.h * .43, Math.max(21, 16 / view.scale), groupColor, 'center', 700);
     });
     if (state.fault) {
       const ship = positions.ship;

@@ -18,7 +18,7 @@ dialog{display:none;position:fixed;top:50%;left:50%;right:auto;bottom:auto;trans
 
 /* Keep the component library aligned with the complete assembly frame. */
 @media(min-width:561px){
- .play-layout{height:calc(100vh - 110px);min-height:650px;max-height:1080px}
+ .play-layout{height:calc(100vh - 122px);min-height:600px;max-height:1080px}
  .world-column,.world-frame{height:100%;min-height:0}
  .world-frame{display:flex;flex-direction:column}
  .world-topline,.map-bottom{flex-shrink:0}
@@ -33,3 +33,4 @@ dialog{display:none;position:fixed;top:50%;left:50%;right:auto;bottom:auto;trans
  .part-detail p{font-size:13px;line-height:1.5;margin:3px 0}
  .detail-kicker{display:none}
 }
+@media(min-width:1400px){.filing-footer{height:24px;padding:3px 0 5px}}
